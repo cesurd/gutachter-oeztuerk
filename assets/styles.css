@@ -1,0 +1,459 @@
+/* ============================================================
+   A. Öztürk – Kfz-Sachverständiger Ulm · Pitch-Website
+   Design: dunkles Navy + Signal-Amber (Automotive-Trust),
+   WhatsApp-Grün als Conversion-Farbe. Fonts lokal (DSGVO).
+   ============================================================ */
+
+@font-face{
+  font-family:'Archivo';font-style:normal;font-weight:400 900;
+  font-display:swap;src:url('fonts/archivo-var.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Inter';font-style:normal;font-weight:100 900;
+  font-display:swap;src:url('fonts/inter-var.woff2') format('woff2');
+}
+
+:root{
+  --navy-950:#070C15;
+  --navy-900:#0B1424;
+  --navy-800:#101C33;
+  --navy-700:#182743;
+  --ink:#101A2B;
+  --muted:#5C6B80;
+  --line:#E4EAF2;
+  --bg:#FFFFFF;
+  --bg-soft:#F4F7FB;
+  --amber:#FFB800;
+  --amber-deep:#E0A100;
+  --amber-text:#6B4E00; /* dunkles Amber für Text auf hellen Flächen (WCAG AA) */
+  --amber-soft:#FFF4D6;
+  --wa:#25D366;
+  --wa-deep:#1DAF54;
+  --star:#FBBC04;
+  --font-head:'Archivo',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,sans-serif;
+  --radius:18px;
+  --shadow-sm:0 1px 2px rgba(16,26,43,.06),0 2px 8px rgba(16,26,43,.06);
+  --shadow-md:0 2px 6px rgba(16,26,43,.07),0 12px 32px rgba(16,26,43,.10);
+  --shadow-lg:0 4px 12px rgba(7,12,21,.18),0 24px 64px rgba(7,12,21,.28);
+  --wrap:1160px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+body{
+  margin:0;font-family:var(--font-body);font-size:1rem;line-height:1.65;
+  color:var(--ink);background:var(--bg);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-head);line-height:1.12;letter-spacing:-.015em;margin:0 0 .6em}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--navy-900);outline-offset:3px;border-radius:4px}
+.hero :focus-visible,.section--dark :focus-visible,.footer :focus-visible,.sticky-cta :focus-visible{outline-color:#fff}
+.fab-wa:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 6px var(--navy-900)}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+[id]{scroll-margin-top:88px}
+
+.skip-link{
+  position:absolute;left:-999px;top:0;background:var(--navy-900);color:#fff;
+  padding:.7rem 1.2rem;z-index:200;border-radius:0 0 10px 0;font-weight:600;
+}
+.skip-link:focus{left:0}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 1.25rem}
+
+/* ---------- Header ---------- */
+.header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;transition:border-color .25s,box-shadow .25s;
+}
+.header.is-scrolled{border-color:var(--line);box-shadow:var(--shadow-sm)}
+.header__in{display:flex;align-items:center;gap:1rem;min-height:72px}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;margin-right:auto}
+.brand img{height:42px;width:42px}
+.brand__name{font-family:var(--font-head);font-weight:800;font-size:1.02rem;line-height:1.12;color:var(--navy-900)}
+.brand__sub{display:block;font-weight:500;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;gap:1.4rem;align-items:center}
+.nav a{
+  text-decoration:none;font-weight:600;font-size:.92rem;color:var(--ink);
+  padding:.4rem 0;border-bottom:2px solid transparent;transition:border-color .2s,color .2s;
+}
+.nav a:hover{color:var(--navy-900);border-color:var(--amber)}
+.header__cta{display:flex;align-items:center;gap:.6rem}
+
+.nav-toggle{
+  display:none;background:none;border:1px solid var(--line);border-radius:10px;
+  width:44px;height:44px;cursor:pointer;padding:10px;
+}
+.nav-toggle span{display:block;height:2px;background:var(--navy-900);margin:5px 0;border-radius:2px;transition:transform .25s,opacity .25s}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  font-family:var(--font-head);font-weight:700;font-size:1rem;line-height:1.2;
+  padding:.95rem 1.5rem;border-radius:14px;text-decoration:none;border:0;cursor:pointer;
+  transition:transform .15s,box-shadow .2s,background .2s;
+}
+.btn:active{transform:translateY(1px)}
+.btn svg{flex:none}
+/* Dunkle Schrift auf WhatsApp-Grün: 9,4:1 Kontrast (Weiß wäre nur 1,98:1) */
+.btn--wa{background:var(--wa);color:var(--navy-950);box-shadow:0 6px 20px rgba(37,211,102,.35)}
+.btn--wa:hover{background:var(--wa-deep);box-shadow:0 8px 26px rgba(37,211,102,.45)}
+.btn--phone{background:var(--amber);color:var(--navy-950);box-shadow:0 6px 20px rgba(255,184,0,.3)}
+.btn--phone:hover{background:var(--amber-deep)}
+.btn--ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn--ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.btn--dark{background:var(--navy-900);color:#fff}
+.btn--dark:hover{background:var(--navy-700)}
+.btn--sm{font-size:.9rem;padding:.65rem 1.1rem;border-radius:11px}
+.btn--lg{font-size:1.08rem;padding:1.1rem 1.8rem}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;overflow:hidden;color:#fff;
+  background:
+    radial-gradient(1100px 520px at 78% -10%,rgba(255,184,0,.14),transparent 60%),
+    radial-gradient(900px 500px at -10% 110%,rgba(37,211,102,.10),transparent 55%),
+    linear-gradient(160deg,var(--navy-900) 0%,var(--navy-950) 70%);
+}
+.hero::after{ /* feine Fahrbahn-Linie als Automotive-Akzent */
+  content:"";position:absolute;inset-inline:0;bottom:0;height:4px;
+  background:repeating-linear-gradient(90deg,var(--amber) 0 48px,transparent 48px 96px);
+  opacity:.55;
+}
+.hero__in{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center;
+  padding:4.5rem 0 4.8rem;
+}
+.hero__eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-weight:600;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--amber);background:rgba(255,184,0,.1);border:1px solid rgba(255,184,0,.35);
+  padding:.4rem .9rem;border-radius:999px;margin-bottom:1.2rem;
+}
+.hero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:800;color:#fff}
+.nowrap{white-space:nowrap}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero__lead{font-size:clamp(1.02rem,1.6vw,1.18rem);color:#C7D2E2;max-width:52ch;margin-bottom:1.8rem}
+.hero__lead strong{color:#fff}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:1.6rem}
+.hero__note{font-size:.86rem;color:#8FA0B8;margin:0}
+.hero__note a{color:#C7D2E2}
+
+.hero__trust{
+  display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2.2rem;padding-top:1.6rem;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.trust-item{display:flex;align-items:center;gap:.65rem}
+.trust-item svg{flex:none}
+.trust-item b{display:block;font-family:var(--font-head);font-size:.98rem;color:#fff;line-height:1.2}
+.trust-item .stars{color:var(--star);letter-spacing:.08em}
+.trust-item span{font-size:.78rem;color:#8FA0B8}
+
+.hero__media{position:relative}
+.hero__photo{
+  border-radius:24px;box-shadow:var(--shadow-lg);
+  border:1px solid rgba(255,255,255,.14);
+  width:100%;height:auto;object-fit:cover;aspect-ratio:3/4;
+}
+.hero__badge{
+  position:absolute;left:-1.2rem;bottom:1.6rem;
+  background:#fff;color:var(--ink);border-radius:16px;box-shadow:var(--shadow-md);
+  padding:.8rem 1.1rem;display:flex;align-items:center;gap:.75rem;
+}
+.hero__badge .g{width:30px;height:30px}
+.hero__badge b{font-family:var(--font-head);font-size:1.05rem;display:block;line-height:1.1}
+.hero__badge .stars{color:var(--star);letter-spacing:.08em;font-size:.85rem}
+.hero__badge span{font-size:.75rem;color:var(--muted)}
+
+/* ---------- Notfall-Hinweis ---------- */
+.alert{background:var(--amber);color:var(--navy-950)}
+.alert__in{display:flex;align-items:center;gap:.9rem;padding:.85rem 0;font-size:.95rem}
+.alert__in svg{flex:none}
+.alert__in p{margin:0;line-height:1.45}
+.alert__in strong{font-family:var(--font-head)}
+
+/* ---------- Sections ---------- */
+.section{padding:5rem 0}
+.section--soft{background:var(--bg-soft)}
+.section--dark{background:linear-gradient(160deg,var(--navy-900),var(--navy-950));color:#fff}
+.section__head{max-width:680px;margin-bottom:2.8rem}
+.section__head--center{margin-inline:auto;text-align:center}
+.eyebrow{
+  display:inline-block;font-weight:700;font-size:.78rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--amber-text);margin-bottom:.7rem;
+}
+.section--dark .eyebrow{color:var(--amber)}
+.section h2{font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:800;color:var(--navy-900)}
+.section--dark h2{color:#fff}
+.section__sub{color:var(--muted);font-size:1.05rem}
+.section--dark .section__sub{color:#B9C6D8}
+
+/* ---------- Leistungen ---------- */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.8rem;box-shadow:var(--shadow-sm);
+  transition:transform .2s,box-shadow .25s,border-color .25s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#D4DDEA}
+.card__icon{
+  width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
+  background:var(--navy-900);margin-bottom:1.1rem;
+}
+.card h3{font-size:1.12rem;font-weight:700;color:var(--navy-900);margin-bottom:.4rem}
+.card p{font-size:.94rem;color:var(--muted);margin:0}
+.card__tag{
+  display:inline-block;margin-top:.9rem;font-size:.75rem;font-weight:700;
+  color:var(--amber-text);background:var(--amber-soft);
+  padding:.25rem .7rem;border-radius:999px;
+}
+
+/* ---------- Recht / Info-Split ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.split__media{position:relative}
+.split__media img{border-radius:22px;box-shadow:var(--shadow-md);width:100%;height:auto}
+.split__media figcaption{
+  position:absolute;left:1rem;bottom:1rem;right:1rem;
+  background:rgba(7,12,21,.78);backdrop-filter:blur(6px);color:#DCE5F0;
+  font-size:.8rem;padding:.55rem .9rem;border-radius:12px;
+}
+.checklist{list-style:none;margin:0 0 1.6rem;padding:0}
+.checklist li{display:flex;gap:.8rem;margin-bottom:1rem;align-items:flex-start}
+.checklist svg{flex:none;margin-top:.2rem}
+.checklist b{color:var(--navy-900)}
+.checklist span{display:block;font-size:.93rem;color:var(--muted)}
+
+/* ---------- Versicherer-Marquee ---------- */
+.marquee-band{padding:3.4rem 0 3.8rem;background:#fff}
+.marquee-band__label{
+  text-align:center;font-weight:700;font-size:.78rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 2.2rem;
+}
+.marquee{
+  overflow:hidden;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+}
+.marquee__track{
+  display:flex;align-items:center;width:max-content;
+  animation:marquee-scroll 36s linear infinite;
+}
+.marquee:hover .marquee__track{animation-play-state:paused}
+.marquee__item{
+  flex-shrink:0;margin-right:4.5rem;white-space:nowrap;
+  font-family:var(--font-head);font-weight:800;
+  font-size:clamp(1.35rem,2.6vw,1.9rem);color:#AEBACB;
+}
+@keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .marquee__track{animation:none;width:auto;flex-wrap:wrap;justify-content:center;gap:1rem 0}
+  .marquee__item[aria-hidden]{display:none}
+  .marquee{mask-image:none;-webkit-mask-image:none}
+}
+@media (max-width:640px){.marquee__item{margin-right:2.6rem}}
+
+/* ---------- Ablauf ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;counter-reset:step}
+.step{
+  position:relative;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);padding:1.7rem;box-shadow:var(--shadow-sm);
+}
+.step::before{
+  counter-increment:step;content:counter(step,decimal-leading-zero);
+  font-family:var(--font-head);font-weight:800;font-size:.85rem;
+  color:var(--navy-950);background:var(--amber);
+  display:inline-grid;place-items:center;
+  padding:.35rem .7rem;border-radius:999px;margin-bottom:1rem;
+}
+.step h3{font-size:1.05rem;font-weight:700;color:var(--navy-900);margin-bottom:.35rem}
+.step p{font-size:.9rem;color:var(--muted);margin:0}
+
+/* ---------- Bewertungen ---------- */
+.rating-summary{
+  display:flex;align-items:center;justify-content:center;gap:1.1rem;
+  margin-bottom:2.6rem;flex-wrap:wrap;
+}
+.rating-summary .g{width:44px;height:44px}
+.rating-summary .score{font-family:var(--font-head);font-weight:800;font-size:2.4rem;color:var(--navy-900)}
+.rating-summary .stars{color:var(--star);font-size:1.25rem;letter-spacing:.12em}
+.rating-summary small{display:block;color:var(--muted);font-size:.85rem}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.review{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.6rem;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:.8rem;
+}
+.review__stars{color:var(--star);letter-spacing:.14em;font-size:.95rem}
+.review p{font-size:.93rem;color:var(--ink);margin:0;flex:1}
+.review footer{display:flex;align-items:center;gap:.75rem;margin-top:.4rem}
+.review .avatar{
+  width:40px;height:40px;border-radius:50%;flex:none;
+  display:grid;place-items:center;color:#fff;
+  font-family:var(--font-head);font-weight:700;font-size:1rem;
+}
+.review b{display:block;font-size:.9rem;color:var(--navy-900);line-height:1.2}
+.review small{color:var(--muted);font-size:.78rem}
+.reviews-cta{text-align:center;margin-top:2.4rem}
+.reviews-cta p{color:var(--muted);font-size:.9rem;margin-top:.9rem}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:800px;margin:0 auto}
+.faq details{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  margin-bottom:.9rem;overflow:hidden;box-shadow:var(--shadow-sm);
+}
+.faq summary{
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center;
+  font-family:var(--font-head);font-weight:700;font-size:1.02rem;color:var(--navy-900);
+  padding:1.15rem 1.4rem;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";font-size:1.5rem;font-weight:400;color:var(--amber-text);
+  transition:transform .25s;line-height:1;
+}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .faq__body{padding:0 1.4rem 1.3rem;color:var(--muted);font-size:.95rem}
+.faq .faq__body p{margin:0}
+
+/* ---------- Einzugsgebiet ---------- */
+.areas{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;max-width:760px;margin:0 auto}
+.areas span{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:.45rem 1.05rem;font-size:.88rem;font-weight:600;color:var(--ink);
+}
+.areas span.is-main{background:var(--navy-900);color:#fff;border-color:var(--navy-900)}
+
+/* ---------- Kontakt ---------- */
+.contact{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:start}
+.contact__cards{display:grid;gap:1rem}
+.ccard{
+  display:flex;align-items:center;gap:1.1rem;text-decoration:none;
+  background:var(--navy-800);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:1.15rem 1.3rem;color:#fff;
+  transition:transform .15s,border-color .2s,background .2s;
+}
+.ccard:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.28);background:var(--navy-700)}
+.ccard__icon{
+  width:48px;height:48px;border-radius:13px;display:grid;place-items:center;flex:none;
+  background:rgba(255,255,255,.08);
+}
+.ccard--wa .ccard__icon{background:var(--wa)}
+.ccard--tel .ccard__icon{background:var(--amber)}
+.ccard b{display:block;font-family:var(--font-head);font-size:1.05rem;line-height:1.25}
+.ccard span{font-size:.82rem;color:#9DACC2}
+.contact__info{
+  background:var(--navy-800);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:1.9rem;
+}
+.contact__info h3{color:#fff;font-size:1.15rem;margin-bottom:1.2rem}
+.contact__info dl{margin:0;display:grid;gap:1.05rem}
+.contact__info dt{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8FA0B8}
+.contact__info dd{margin:0;font-size:.98rem;color:#E4EAF2}
+.contact__info dd a{color:#E4EAF2}
+.contact__maps{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.5rem}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--navy-950);color:#8FA0B8;font-size:.9rem}
+.footer__in{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;
+  padding:3.2rem 0 2.4rem;border-bottom:1px solid rgba(255,255,255,.08);
+}
+.footer__brand{display:flex;align-items:flex-start;gap:.8rem}
+.footer__brand img{height:40px;width:40px}
+.footer__brand b{font-family:var(--font-head);color:#fff;display:block;line-height:1.2}
+.footer__brand small{font-size:.78rem}
+.footer h4{color:#fff;font-family:var(--font-head);font-size:.92rem;margin:0 0 .9rem}
+.footer ul{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.footer a{color:#B9C6D8;text-decoration:none}
+.footer a:hover{color:#fff;text-decoration:underline}
+.footer__legal{
+  display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:space-between;align-items:center;
+  padding:1.3rem 0;font-size:.8rem;
+}
+.footer__legal nav{display:flex;gap:1.4rem}
+
+/* ---------- Floating WhatsApp (Desktop) ---------- */
+.fab-wa{
+  position:fixed;right:1.5rem;bottom:1.5rem;z-index:90;
+  width:60px;height:60px;border-radius:50%;
+  background:var(--wa);display:grid;place-items:center;
+  box-shadow:0 8px 28px rgba(37,211,102,.5);
+  transition:transform .2s,box-shadow .2s;
+}
+.fab-wa:hover{transform:scale(1.07);box-shadow:0 10px 34px rgba(37,211,102,.6)}
+
+/* ---------- Mobile Sticky CTA ---------- */
+.sticky-cta{
+  display:none;position:fixed;inset-inline:0;bottom:0;z-index:95;
+  background:rgba(7,12,21,.96);backdrop-filter:blur(10px);
+  padding:.65rem .9rem calc(.65rem + env(safe-area-inset-bottom));
+  gap:.7rem;border-top:1px solid rgba(255,255,255,.12);
+}
+.sticky-cta .btn{flex:1;font-size:.95rem;padding:.85rem 1rem}
+
+/* ---------- Reveal-Animation ----------
+   Nur aktiv, wenn <html class="js"> gesetzt wurde (Inline-Script im <head>).
+   Ohne JavaScript bleibt damit der gesamte Inhalt sichtbar. */
+html.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+html.js .reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none}}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width:1020px){
+  /* Nav klappt schon hier ein – 6 Links + Telefon-Button überlaufen sonst zwischen 761 und 1000px */
+  .nav{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:#fff;border-bottom:1px solid var(--line);box-shadow:var(--shadow-md);
+    padding:.6rem 1.25rem 1rem;
+  }
+  .nav.is-open{display:flex}
+  .nav a{padding:.85rem 0;border-bottom:1px solid var(--line);font-size:1rem}
+  .nav a:last-child{border-bottom:0}
+  .nav-toggle{display:block}
+  .hero__in{grid-template-columns:1fr;gap:2.6rem;padding:3.4rem 0 4rem}
+  .hero h1{max-width:none}
+  .hero__media{max-width:440px}
+  .grid-3,.reviews{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .split{grid-template-columns:1fr;gap:2.4rem}
+  .contact{grid-template-columns:1fr;gap:2rem}
+  .footer__in{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .header__cta .btn--phone{display:none}
+  .section{padding:3.6rem 0}
+  .grid-3,.reviews,.steps{grid-template-columns:1fr}
+  .hero__badge{left:.8rem;bottom:.9rem;padding:.65rem .9rem}
+  .hero__ctas .btn{width:100%}
+  .hero__eyebrow{font-size:.7rem;letter-spacing:.04em}
+  .sticky-cta{display:flex}
+  .fab-wa{display:none}
+  body{padding-bottom:76px}
+  .footer__in{grid-template-columns:1fr;gap:1.8rem}
+  .footer__legal{justify-content:center;text-align:center}
+  .alert__in{align-items:flex-start}
+}
+
+/* Einfache Nav (Impressum/Datenschutz): nur ein Link, kein Toggle – bleibt auf allen Breiten sichtbar.
+   Steht bewusst NACH den Media Queries. */
+.nav.nav--simple{
+  display:flex;position:static;flex-direction:row;
+  background:transparent;border:0;box-shadow:none;padding:0;
+}
+.nav.nav--simple a{border-bottom:2px solid transparent;padding:.4rem 0;font-size:.92rem}

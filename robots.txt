@@ -1,0 +1,8 @@
+# Vorschau-Deployment: Deindexierung läuft über <meta name="robots" content="noindex">
+# auf jeder Seite. Bewusst KEIN "Disallow: /" – sonst crawlt Google die Seiten nie
+# und kann das noindex nicht sehen (URL könnte trotzdem als Treffer auftauchen).
+# Vor Go-Live: noindex aus den Seiten entfernen und Sitemap-Zeile aktivieren.
+User-agent: *
+Allow: /
+
+# Sitemap: https://www.kfz-gutachter-oeztuerk-ulm.de/sitemap.xml

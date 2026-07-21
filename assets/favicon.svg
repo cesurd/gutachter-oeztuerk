@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Kfz-Gutachter A. Öztürk – Logo-Platzhalter">
+  <!-- PLATZHALTER-Logo: einfaches Auto-Piktogramm, bis das finale Logo
+       mit Herrn Öztürk geklärt ist (siehe Go-Live-Checkliste Punkt 14) -->
+  <rect width="64" height="64" rx="14" fill="#0B1424"/>
+  <path fill="#FFFFFF" d="M18,30 L23,19.5 C23.6,18.3 24.8,17.5 26.2,17.5 L37.8,17.5 C39.2,17.5 40.4,18.3 41,19.5 L46,30 L49,31 C50.8,31.6 52,33.3 52,35.2 L52,42 C52,43.1 51.1,44 50,44 L47.5,44 C46.4,44 45.5,43.1 45.5,42 L45.5,40.5 L18.5,40.5 L18.5,42 C18.5,43.1 17.6,44 16.5,44 L14,44 C12.9,44 12,43.1 12,42 L12,35.2 C12,33.3 13.2,31.6 15,31 Z M22.5,29.5 L41.5,29.5 L37.6,21.3 C37.4,20.9 37,20.6 36.5,20.6 L27.5,20.6 C27,20.6 26.6,20.9 26.4,21.3 Z"/>
+  <circle cx="21" cy="47" r="4.6" fill="#FFB800"/>
+  <circle cx="43" cy="47" r="4.6" fill="#FFB800"/>
+</svg>
