@@ -79,7 +79,7 @@ p{margin:0 0 1em}
 .header.is-scrolled{border-color:var(--line);box-shadow:var(--shadow-sm)}
 .header__in{display:flex;align-items:center;gap:1rem;min-height:72px}
 .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;margin-right:auto}
-.brand img{height:52px;width:auto}
+.brand img{height:44px;width:auto}
 .brand__name{font-family:var(--font-head);font-weight:800;font-size:1.02rem;line-height:1.12;color:var(--navy-900)}
 .brand__sub{display:block;font-weight:500;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .nav{display:flex;gap:1.4rem;align-items:center}
@@ -437,7 +437,7 @@ html.js .reveal.is-visible{opacity:1;transform:none}
 }
 @media (max-width:760px){
   .header__cta .btn--phone{display:none}
-  .brand img{height:40px}
+
   .section{padding:3.6rem 0}
   .grid-3,.reviews,.steps{grid-template-columns:1fr}
   .hero__badge{left:.8rem;bottom:.9rem;padding:.65rem .9rem}
